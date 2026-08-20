@@ -7,12 +7,16 @@ import TaskManegementSystem.Enums.TaskStatus;
 import TaskManegementSystem.Model.Task;
 import TaskManegementSystem.Model.User;
 import TaskManegementSystem.Repository.TaskRepository;
-import TaskManegementSystem.Repository.TaskRepositoryImpl;
 
 public class TaskManagerService 
 {
     private static int id=1;
-    private static final TaskRepository repository=new TaskRepositoryImpl();
+    private TaskRepository repository;
+   
+    public TaskManagerService(TaskRepository repository)
+    {
+        this.repository=repository;
+    }
 
     public Task createTask(String title, String description, User assignee, LocalDate date)
     {
