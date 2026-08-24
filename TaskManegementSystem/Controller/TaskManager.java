@@ -10,7 +10,7 @@ import TaskManegementSystem.Service.TaskManagerService;
 
 public class TaskManager 
 {
-    private static TaskManagerService taskManagerService;
+    private final TaskManagerService taskManagerService;
 
     public TaskManager(TaskManagerService taskManagerService)
     {

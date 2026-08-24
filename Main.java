@@ -4,6 +4,9 @@ import java.util.List;
 import TaskManegementSystem.Controller.TaskManager;
 import TaskManegementSystem.Model.Task;
 import TaskManegementSystem.Model.User;
+import TaskManegementSystem.NotificationService.EmailNotifier;
+import TaskManegementSystem.NotificationService.NotificationService;
+import TaskManegementSystem.NotificationService.Notifier;
 import TaskManegementSystem.Repository.TaskRepository;
 import TaskManegementSystem.Repository.TaskRepositoryImpl;
 import TaskManegementSystem.Service.TaskManagerService;
@@ -19,7 +22,9 @@ public class Main
     private static void testTaskManagementSystem()
     {
        TaskRepository repository=new TaskRepositoryImpl();
-       TaskManagerService service=new TaskManagerService(repository);
+       Notifier emailNotifier=new EmailNotifier();
+       NotificationService notificationService=new NotificationService(List.of(emailNotifier));
+       TaskManagerService service=new TaskManagerService(repository, notificationService);
        TaskManager controller=new TaskManager(service);
        User assignee=new User(1,"shambhavi.pandey@gmail.com", "Shambhavi Pandey");
 
