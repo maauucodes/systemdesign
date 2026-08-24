@@ -37,11 +37,13 @@ public class TaskManagerService
     {
         Task task=findTaskById(taskId);
         
-        task.updateTitle(title);
-        task.updateDescription(description);
-        task.updateDueDate(date);
-        task.updateAssignee(assignee);
-        task.updateStatus(status);
+        synchronized(task){
+            task.updateTitle(title);
+            task.updateDescription(description);
+            task.updateDueDate(date);
+            task.updateAssignee(assignee);
+            task.updateStatus(status);
+        }
 
         notificationService.notifyNotifiers(task, TaskEvent.UPDATED);
     }
