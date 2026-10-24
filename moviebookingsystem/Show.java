@@ -1,16 +1,18 @@
 package moviebookingsystem;
 
 public class Show {
-    private Movie movie;
+    private String showId;
     private Screen screen;
-    private int startTime;
-    private int endTime;
+    private String movieName;
+    private long start;
+    private long end;
 
-    Show(Movie movie, Screen screen, int startTime)
+    Show(String showId, Screen screen, String movieName, long start, long end)
     {
-        this.movie=movie;
+        this.showId=showId;
         this.screen=screen;
-        this.startTime=startTime;
-        this.endTime=startTime+movie.getRunTime();
+        this.movieName=movieName;
+        this.start=start;
+        this.end=end;
     }
 }

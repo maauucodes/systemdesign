@@ -1,47 +1,59 @@
 package moviebookingsystem;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.ReentrantLock;
 
-public class seatLockProvider 
-{
-    private static final long LOCK_DURATION=5L;
-    private Map<String, SeatLock> lockedShowSeats=new HashMap<>(); // key=showid+seatid 
+public class SeatLockProvider {
+    private Map<String, ReentrantLock> reentrantLockStore=new ConcurrentHashMap<>();
+    private Map<String, SeatLock> seatLockStore=new ConcurrentHashMap<>();
 
-    public synchronized boolean isLocked(String showId, String seatId)
+    public void lock(String seatId, String userId, String showId)
     {
-        String key=showId+" "+seatId;
+        String key=seatId+" "+showId;
+        ReentrantLock lock=reentrantLockStore.computeIfAbsent(key, id->new ReentrantLock());
 
-        SeatLock lock=lockedShowSeats.get(key);
+        long currentTime=System.currentTimeMillis();
 
-        if(lock==null)
+        lock.lock();
+        try
+       { if(isLocked(key))
         {
-            return false;
+            throw new RuntimeException("This seat in the show is alreadyblocked");
         }
-        if(isExpired(lock))
-        {
-            lockedShowSeats.remove(key);
-            return false;
+        seatLockStore.computeIfAbsent(key, id->new SeatLock(seatId, userId, showId,currentTime+5L));}
+        finally{
+            lock.unlock();
         }
-        return true;
-    }
-    public synchronized void lock(String showId, String seatId, String userId)
+}
+
+    public boolean isLocked(String key)
     {
-        String key=showId+" "+seatId;
+        ReentrantLock lock=reentrantLockStore.computeIfAbsent(key, id->new ReentrantLock());
 
-        if(!isLocked(showId, seatId))
-        {
-            lockedShowSeats.put(key, new SeatLock(showId, userId, seatId, System.currentTimeMillis()+LOCK_DURATION));
+        lock.lock();
+        try{
+            SeatLock seatLock=seatLockStore.get(key);
+            if(isExpired(seatLock))
+            {
+                seatLockStore.remove(key);
+                return false;
+            }
+            else{
+                return true;
+            }
         }
-        throw new RuntimeException("This seat is not available");
+        finally
+        {lock.unlock();}
     }
-    public boolean isExpired(SeatLock lock)
+    public ReentrantLock getLock(String key)
     {
-        if(lock.getExpiryTime()<System.currentTimeMillis()+LOCK_DURATION)
-        {
-            return true;
-        }
-        return false;
+        return reentrantLockStore.computeIfAbsent(key, lock->new ReentrantLock());
     }
+    public boolean isExpired(SeatLock seatLock)
+    {
+        long currentTime=System.currentTimeMillis();
 
+        return seatLock.getExpiryTime()<currentTime;
+    }
 }

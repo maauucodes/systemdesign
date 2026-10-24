@@ -1,6 +1,6 @@
 package moviebookingsystem;
 
-public enum SeatType {
+public enum Type {
     REGULAR,
     RECLINER
 }

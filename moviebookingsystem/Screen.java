@@ -1,6 +1,5 @@
 package moviebookingsystem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Screen {
@@ -13,12 +12,12 @@ public class Screen {
         this.seats=seats;
     }
 
+    public String getId()
+    {
+        return screenId;
+    }
     public List<Seat> getSeats()
     {
         return List.copyOf(seats);
-    }
-    public void addSeat(Seat seat)
-    {
-        seats.add(seat);
     }
 }

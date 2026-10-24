@@ -1,21 +1,27 @@
 package moviebookingsystem;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Booking {
+    private String showId;
+    private String seatId;
     private String userId;
-    private Show show;
-    private double amount;
-    private List<Seat> seats=new ArrayList<>();
+    private BookingStatus status;
+    private double bookingAmount;
 
-   Booking(String userId, Show show, double amount, List<Seat> seats)
-   {
-      this.userId=userId;
-      this.show=show;
-      this.amount=amount;
-      this.seats=seats;
-   }
+    Booking(String userId, String showId, String seatId, double bookingAmount)
+    {
+        this.userId=userId;
+        this.showId=showId;
+        this.seatId=seatId;
+        this.status=BookingStatus.PENDING_CONFIRMATION;
+        this.bookingAmount=bookingAmount;
+    }
 
-   //getters
+    public double getBookingAmount()
+    {
+        return bookingAmount;
+    }
+    public void updateStatus(BookingStatus status)
+    {
+        this.status=status;
+    }
 }

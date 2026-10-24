@@ -1,22 +1,27 @@
 package moviebookingsystem;
 
 public class Movie {
+    private String id;
     private String name;
-    private int duration;
+    private long runningLength;
 
-
-    Movie(String name, int duration)
+    Movie(String id, String name, long runningLength)
     {
+        this.id=id;
         this.name=name;
-        this.duration=duration;
+        this.runningLength=runningLength;
     }
 
-    public String getMovieName()
+    public String getId()
+    {
+        return id;
+    }
+    public long getRunningLength()
+    {
+        return runningLength;
+    }
+    public String getName()
     {
         return name;
-    }
-    public int getRunTime()
-    {
-        return duration;
     }
 }

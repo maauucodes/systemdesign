@@ -1,5 +1,5 @@
 package moviebookingsystem;
 
 public interface PaymentStrategy {
-    public boolean pay(double amount);
+    public PaymentStatus pay(double amount);
 }

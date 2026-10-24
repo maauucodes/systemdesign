@@ -1,18 +1,33 @@
 package moviebookingsystem;
 
 public class SeatLock {
+    private String seatId;
     private String showId;
     private String userId;
-    private String seatId;
     private long expiryTime;
 
-    SeatLock(String showId, String userId, String seatId, long expiryTime)
+    SeatLock(String seatId, String userId, String showId, long expiryTime)
     {
         this.seatId=seatId;
-        this.userId=userId;
         this.showId=showId;
+        this.userId=userId;
         this.expiryTime=expiryTime;
     }
 
-    //getters
+    public long getExpiryTime()
+    {
+        return expiryTime;
+    }
+    public String getShowId()
+    {
+        return showId;
+    }
+    public String getSeatId()
+    {
+        return seatId;
+    }
+    public String getUserId()
+    {
+        return userId;
+    }
 }

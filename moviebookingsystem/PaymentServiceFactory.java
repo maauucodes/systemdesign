@@ -1,12 +1,12 @@
 package moviebookingsystem;
 
-public class PaymentStrategyFactory {
+public class PaymentServiceFactory {
     public PaymentStrategy createPaymentStrategy(PaymentMethod method)
     {
         return switch(method){
             case PaymentMethod.UPI->new UPIPaymentStrategy();
             case PaymentMethod.CREDIT_CARD->new CreditCardPaymentStrategy();
-            default->throw new IllegalArgumentException("This method of payment is not supported");
+            default->throw new RuntimeException("The selected method does not exist");
         };
     }
 }

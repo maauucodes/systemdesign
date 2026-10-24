@@ -2,10 +2,9 @@ package moviebookingsystem;
 
 public class UPIPaymentStrategy implements PaymentStrategy{
     @Override 
-    public boolean pay(double amount)
+    public PaymentStatus pay(double amount)
     {
-        //integrate upi payment end points
-
-        return true;
+        // intergate upi end point
+        return PaymentStatus.SUCCESS;
     }
 }

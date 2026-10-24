@@ -2,26 +2,26 @@ package moviebookingsystem;
 
 public class Seat {
     private String seatId;
-    private double price;
-    private SeatType type;
+    private Type seatType;
+    private double seatPrice;
 
-    Seat(String seatId, double price, SeatType type)
+    Seat(String seatId, Type seatType, double seatPrice)
     {
         this.seatId=seatId;
-        this.price=price;
-        this.type=type;
+        this.seatType=seatType;
+        this.seatPrice=seatPrice;
     }
 
-    public SeatType getSeatType()
+    public String getId()
     {
-        return type;
+        return seatId;
     }
-    public double getSeatPrice()
+    public Type getType()
     {
-        return price;
+        return seatType;
     }
-    public void setSeatPrice(double price)
+    public double getPrice()
     {
-        this.price=price;
+        return seatPrice;
     }
 }
