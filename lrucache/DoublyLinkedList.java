@@ -19,12 +19,9 @@ public class DoublyLinkedList<K, V> {
         head.getNext().setPrevious(node);
         head.setNext(node);
     }
-    public void addToTail( Node<K, V> node)
+    public void moveToHead( Node<K, V> node)
     {
-        node.setPrevious(tail.getPrevious());
-        tail.getPrevious().setNext(node);
-        node.setNext(tail);
-        tail.setPrevious(node);
+        // move node to head
     }
     public synchronized K removeFromTail()
     {
