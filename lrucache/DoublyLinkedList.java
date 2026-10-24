@@ -6,8 +6,8 @@ public class DoublyLinkedList<K, V> {
 
     DoublyLinkedList()
     {
-        head=null;
-        tail=null;
+        head=new Node<K, V>(null, null);
+        tail=new Node<K, V>(null, null);;
         head.setNext(tail);
         tail.setPrevious(head);
     }
