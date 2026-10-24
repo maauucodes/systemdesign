@@ -17,12 +17,14 @@ public class DoublyLinkedList<K, V> {
         node.setNext(head.getNext());
         node.setPrevious(head);
         head.getNext().setPrevious(node);
+        head.setNext(node);
     }
     public void addToTail( Node<K, V> node)
     {
         node.setPrevious(tail.getPrevious());
         tail.getPrevious().setNext(node);
         node.setNext(tail);
+        tail.setPrevious(node);
     }
     public synchronized K removeFromTail()
     {

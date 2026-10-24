@@ -7,7 +7,7 @@ public class LRUCacheService<K, V> {
 
     private LRUCache<K, V> lruCache;
 
-    LRUCacheService(int size)
+    public LRUCacheService(int size)
     {
         lruCache=new LRUCache<>(size);
     }
@@ -16,8 +16,8 @@ public class LRUCacheService<K, V> {
     {
         lruCache.put(key, value);
     }
-    public void get(K key)
+    public V get(K key)
     {
-        lruCache.get(key);
+        return lruCache.get(key);
     }
 }
